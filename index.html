@@ -867,7 +867,7 @@
         <div class="utp"><strong>Price goes up with every new module.</strong> Buy now — all future modules included.</div>
       </div>
 
-      <a href="https://t.me/TheAdAnatomyPayBot" class="cta-btn">GET ACCESS — $49 →</a>
+      <a href="#" class="cta-btn" onclick="openPayBot(); return false;">GET ACCESS — $49 →</a>
       <p class="cta-fine">Binance USDT · One-time payment · Lifetime access</p>
     </div>
 
@@ -881,5 +881,15 @@
   </div>
 
 </div>
+<script>
+function openPayBot() {
+  var tg = window.Telegram && window.Telegram.WebApp;
+  if (tg) {
+    tg.openTelegramLink('https://t.me/TheAdAnatomyPayBot');
+  } else {
+    window.open('https://t.me/TheAdAnatomyPayBot', '_blank');
+  }
+}
+</script>
 </body>
 </html>
