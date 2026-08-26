@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Конверсия От Креатива — Ad Anatomy</title>
+<title>Конверсия От Креатива — CreoLab</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
   // Защита: только из Telegram
   window.addEventListener('DOMContentLoaded', function() {
     var tg = window.Telegram && window.Telegram.WebApp;
     if (!tg || !tg.initData || tg.initData === '') {
-      document.body.innerHTML = '<div style="background:#06000A;color:#FF1A75;font-family:sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:32px;"><div style="font-size:32px;margin-bottom:16px;">🔒</div><div style="font-size:18px;font-weight:600;margin-bottom:8px;">Доступ только через Telegram</div><div style="font-size:14px;color:rgba(245,240,255,0.5);margin-bottom:24px;">Этот курс доступен через<br>@AdAnatomyBot</div><a href="https://t.me/AdAnatomyBot" style="background:#FF1A75;color:#06000A;font-weight:600;padding:12px 28px;text-decoration:none;font-size:15px;">Открыть в Telegram →</a></div>';
+      document.body.innerHTML = '<div style="background:#06000A;color:#FF1A75;font-family:sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:32px;"><div style="font-size:32px;margin-bottom:16px;">🔒</div><div style="font-size:18px;font-weight:600;margin-bottom:8px;">Доступ только через Telegram</div><div style="font-size:14px;color:rgba(245,240,255,0.5);margin-bottom:24px;">Этот курс доступен через<br>@CreoLabBot</div><a href="https://t.me/CreoLabBot" style="background:#FF1A75;color:#06000A;font-weight:600;padding:12px 28px;text-decoration:none;font-size:15px;">Открыть в Telegram →</a></div>';
       return;
     }
     tg.ready();
@@ -435,6 +435,45 @@
     font-size: 11px;
   }
 
+  /* price mini */
+  .price-mini {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .price-mini .old {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--dim);
+    text-decoration: line-through;
+    text-decoration-color: var(--pink);
+  }
+
+  .price-mini .now {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .price-mini .now sup {
+    font-size: 18px;
+    color: var(--pink);
+    vertical-align: super;
+  }
+
+  .price-mini .utp {
+    font-size: 12px;
+    color: var(--muted);
+    max-width: 190px;
+    line-height: 1.4;
+  }
+
+  .price-mini .utp strong { color: var(--yellow); font-weight: 500; }
+
   .cta-btn {
     display: inline-block;
     background: var(--pink);
@@ -491,7 +530,7 @@
 
   <!-- COVER -->
   <div class="cover">
-    <div class="brand-tag">AD ANATOMY</div>
+    <div class="brand-tag">CREOLAB</div>
     <div class="cover-label">НОВЫЙ КУРС</div>
     <h1>
       АНАТОМИЯ<br>
@@ -838,7 +877,7 @@
     <p>Это не теория ради теории — каждый модуль закрывается практикой на твоём реальном оффере. К концу курса у тебя не «насмотренность», а <strong>рабочая система</strong> создания и масштабирования креативов на белых офферах.</p>
 
     <div class="course-teaser">
-      <div class="teaser-tag">AD ANATOMY — КОНВЕРСИЯ ОТ КРЕАТИВА</div>
+      <div class="teaser-tag">CREOLAB — КОНВЕРСИЯ ОТ КРЕАТИВА</div>
       <div class="teaser-title">Система для арбитражников.<br>От анализа продукта до масштаба.</div>
 
       <ul class="teaser-list">
@@ -852,17 +891,23 @@
         <li>Бонус: Кради как художник</li>
       </ul>
 
+      <div class="price-mini">
+        <div class="old">9 800 ₽</div>
+        <div class="now">4 900<sup>₽</sup></div>
+        <div class="utp"><strong>-50% на первый поток.</strong> Дальше цена растёт с каждым набором.</div>
+      </div>
+
       <a href="#" class="cta-btn" onclick="openPayBot(); return false;">ЗАПИСАТЬСЯ НА КУРС →</a>
       <p class="cta-fine">Количество мест на поток ограничено</p>
     </div>
 
-    <p style="font-size:13px;color:var(--muted);margin-top:8px;">Разборы креативов, хуки и механики бесплатно в канале: <strong style="color:var(--white);">@TheAdAnatomy</strong></p>
+    <p style="font-size:13px;color:var(--muted);margin-top:8px;">Разборы креативов, хуки и механики бесплатно в канале: <strong style="color:var(--white);">@CreoLab</strong></p>
   </div>
 
   <!-- FOOTER -->
   <div class="footer">
-    <div class="footer-logo">AD ANATOMY</div>
-    <p>@TheAdAnatomy · Конверсия От Креатива · Курс для арбитражников</p>
+    <div class="footer-logo">CREOLAB</div>
+    <p>@CreoLab · Конверсия От Креатива · Курс для арбитражников</p>
   </div>
 
 </div>
@@ -870,9 +915,9 @@
 function openPayBot() {
   var tg = window.Telegram && window.Telegram.WebApp;
   if (tg) {
-    tg.openTelegramLink('https://t.me/TheAdAnatomyPayBot');
+    tg.openTelegramLink('https://t.me/CreoLabPayBot');
   } else {
-    window.open('https://t.me/TheAdAnatomyPayBot', '_blank');
+    window.open('https://t.me/CreoLabPayBot', '_blank');
   }
 }
 </script>
