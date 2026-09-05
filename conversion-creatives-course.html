@@ -890,7 +890,7 @@
       </div>
 
       <a href="#" class="cta-btn" onclick="openPayBot(); return false;">ЗАПИСАТЬСЯ НА КУРС →</a>
-      <p class="cta-fine">Количество мест на поток ограничено</p>
+      <p class="cta-fine">Оплата картой через Tribute · Количество мест ограничено</p>
     </div>
 
     <p style="font-size:13px;color:var(--muted);margin-top:8px;">Разборы креативов, хуки и механики бесплатно в канале: <strong style="color:var(--white);">@CreoLab</strong></p>
@@ -904,12 +904,16 @@
 
 </div>
 <script>
+// Ссылка на оплату из Tribute: создай Digital Product в боте @tribute,
+// укажи цену 4900 (RUB) и вставь сюда веб-ссылку вида https://web.tribute.tg/p/XXXX
+var TRIBUTE_PAY_LINK = 'https://web.tribute.tg/p/REPLACE_ME';
+
 function openPayBot() {
   var tg = window.Telegram && window.Telegram.WebApp;
-  if (tg) {
-    tg.openTelegramLink('https://t.me/CreoLabPayBot');
+  if (tg && tg.openLink) {
+    tg.openLink(TRIBUTE_PAY_LINK);
   } else {
-    window.open('https://t.me/CreoLabPayBot', '_blank');
+    window.open(TRIBUTE_PAY_LINK, '_blank');
   }
 }
 </script>
