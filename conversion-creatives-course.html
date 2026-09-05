@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Конверсия От Креатива — CreoLab</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+  // Защита: только из Telegram
+  window.addEventListener('DOMContentLoaded', function() {
+    var tg = window.Telegram && window.Telegram.WebApp;
+    if (!tg || !tg.initData || tg.initData === '') {
+      document.body.innerHTML = '<div style="background:#06000A;color:#FF1A75;font-family:sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:32px;"><div style="font-size:32px;margin-bottom:16px;">🔒</div><div style="font-size:18px;font-weight:600;margin-bottom:8px;">Доступ только через Telegram</div><div style="font-size:14px;color:rgba(245,240,255,0.5);margin-bottom:24px;">Этот курс доступен через<br>@CreoLabBot</div><a href="https://t.me/CreoLabBot" style="background:#FF1A75;color:#06000A;font-weight:600;padding:12px 28px;text-decoration:none;font-size:15px;">Открыть в Telegram →</a></div>';
+      return;
+    }
+    tg.ready();
+    tg.expand();
+  });
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #06000A;
+    --pink: #FF1A75;
+    --yellow: #FFE600;
+    --green: #00FF88;
+    --blue: #4D9FFF;
+    --orange: #FF6B00;
+    --white: #F5F0FF;
+    --muted: rgba(245,240,255,0.5);
+    --dim: rgba(245,240,255,0.25);
+    --grid: rgba(255,26,117,0.05);
+    --card: rgba(255,255,255,0.03);
+    --border: rgba(255,255,255,0.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 0 60px;
+    border-bottom: 1px solid rgba(255,26,117,0.2);
+  }
+
+  .brand-tag {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--pink);
+    border: 1px solid var(--pink);
+    display: inline-block;
+    padding: 4px 14px;
+    margin-bottom: 40px;
+    width: fit-content;
+  }
+
+  .cover-label {
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--muted);
+    font-family: 'Bebas Neue', sans-serif;
+    margin-bottom: 16px;
+  }
+
+  .cover h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 11vw, 96px);
+    line-height: 0.92;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+  }
+
+  .cover h1 .line-pink { color: var(--pink); }
+  .cover h1 .line-dim { color: rgba(245,240,255,0.35); }
+
+  .cover-sub {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+
+  .cover-sub strong { color: var(--white); font-weight: 500; }
+
+  .cover-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--dim);
+    font-family: 'Bebas Neue', sans-serif;
+  }
+
+  .meta-item span {
+    display: block;
+    font-size: 20px;
+    color: var(--white);
+    letter-spacing: 0;
+  }
+
+  /* ── INTRO ── */
+  .intro {
+    padding: 64px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .intro p {
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    max-width: 640px;
+  }
+
+  .intro p strong { color: var(--white); font-weight: 500; }
+
+  .intro-quote {
+    margin: 32px 0;
+    padding: 20px 24px;
+    border-left: 3px solid var(--pink);
+    background: rgba(255,26,117,0.05);
+  }
+
+  .intro-quote p {
+    font-size: 16px;
+    font-style: italic;
+    color: var(--white);
+    margin: 0;
+    font-weight: 300;
+  }
+
+  /* ── MODULE SECTION ── */
+  .trigger {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .trigger-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+
+  .trigger-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--pink);
+    opacity: 0.18;
+    min-width: 52px;
+    margin-top: -8px;
+  }
+
+  .trigger-title-block { flex: 1; }
+
+  .trigger-tag {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--pink);
+    margin-bottom: 6px;
+  }
+
+  .trigger h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(30px, 5vw, 46px);
+    line-height: 1;
+    color: var(--white);
+  }
+
+  .trigger h2 em { font-style: normal; }
+
+  /* accent colors per module */
+  .t1 .trigger-num, .t1 .trigger-tag { color: var(--pink); }
+  .t1 h2 em { color: var(--pink); }
+  .t2 .trigger-num, .t2 .trigger-tag { color: var(--orange); }
+  .t2 h2 em { color: var(--orange); }
+  .t3 .trigger-num, .t3 .trigger-tag { color: var(--yellow); }
+  .t3 h2 em { color: var(--yellow); }
+  .t4 .trigger-num, .t4 .trigger-tag { color: var(--green); }
+  .t4 h2 em { color: var(--green); }
+  .t5 .trigger-num, .t5 .trigger-tag { color: var(--blue); }
+  .t5 h2 em { color: var(--blue); }
+  .t6 .trigger-num, .t6 .trigger-tag { color: var(--pink); }
+  .t6 h2 em { color: var(--pink); }
+  .t7 .trigger-num, .t7 .trigger-tag { color: var(--orange); }
+  .t7 h2 em { color: var(--orange); }
+  .t8.bonus .trigger-num, .t8.bonus .trigger-tag { color: var(--yellow); }
+  .t8.bonus h2 em { color: var(--yellow); }
+  .t8.bonus { border-top: 2px dashed rgba(255,230,0,0.35); padding-top: 40px; }
+
+  .trigger-body p {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    max-width: 660px;
+  }
+
+  .trigger-body p strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  /* mechanic box */
+  .mechanic {
+    margin: 24px 0;
+    padding: 20px 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--pink);
+  }
+
+  .t2 .mechanic { border-left-color: var(--orange); }
+  .t3 .mechanic { border-left-color: var(--yellow); }
+  .t4 .mechanic { border-left-color: var(--green); }
+  .t5 .mechanic { border-left-color: var(--blue); }
+  .t6 .mechanic { border-left-color: var(--pink); }
+  .t7 .mechanic { border-left-color: var(--orange); }
+  .t8.bonus .mechanic { border-left-color: var(--yellow); }
+
+  .mechanic-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .mechanic p {
+    font-size: 14px;
+    color: var(--white);
+    margin: 0;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  /* how to use */
+  .how-to { margin-top: 24px; }
+
+  .how-to-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .how-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+    align-items: flex-start;
+  }
+
+  .how-bullet {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--pink);
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+
+  .t2 .how-bullet { background: var(--orange); }
+  .t3 .how-bullet { background: var(--yellow); }
+  .t4 .how-bullet { background: var(--green); }
+  .t5 .how-bullet { background: var(--blue); }
+  .t7 .how-bullet { background: var(--orange); }
+  .t8.bonus .how-bullet { background: var(--yellow); }
+
+  .how-row p {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  .how-row p strong { color: var(--white); font-weight: 500; }
+
+  .sticker {
+    font-family: 'Caveat', cursive;
+    font-size: 15px;
+    color: var(--yellow);
+    transform: rotate(-1.5deg);
+    display: inline-block;
+    margin-left: 10px;
+    opacity: 0.9;
+  }
+
+  /* formula strip */
+  .formula {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .formula-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--dim);
+    margin-right: 4px;
+  }
+
+  .f-block {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 5px 12px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    color: var(--white);
+  }
+
+  .f-arrow { color: var(--pink); font-size: 14px; }
+
+  /* ── CTA SECTION ── */
+  .cta-section { padding: 64px 0; text-align: center; }
+
+  .cta-divider {
+    width: 48px;
+    height: 2px;
+    background: var(--pink);
+    margin: 0 auto 40px;
+  }
+
+  .cta-section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 7vw, 60px);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .cta-section h2 span { color: var(--pink); }
+
+  .cta-section p {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 500px;
+    margin: 0 auto 12px;
+  }
+
+  .cta-section p strong { color: var(--white); font-weight: 500; }
+
+  .course-teaser {
+    background: rgba(255,26,117,0.04);
+    border: 1px solid rgba(255,26,117,0.2);
+    padding: 32px;
+    margin: 36px 0;
+    text-align: left;
+  }
+
+  .teaser-tag {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--pink);
+    margin-bottom: 12px;
+  }
+
+  .teaser-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--white);
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+
+  .teaser-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 20px;
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 480px) {
+    .teaser-list { grid-template-columns: 1fr; }
+  }
+
+  .teaser-list li {
+    font-size: 13px;
+    color: var(--muted);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .teaser-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--pink);
+    font-size: 11px;
+  }
+
+  /* price mini */
+  .price-mini {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .price-mini .old {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--dim);
+    text-decoration: line-through;
+    text-decoration-color: var(--pink);
+  }
+
+  .price-mini .now {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .price-mini .now sup {
+    font-size: 18px;
+    color: var(--pink);
+    vertical-align: super;
+  }
+
+  .price-mini .utp {
+    font-size: 12px;
+    color: var(--muted);
+    max-width: 190px;
+    line-height: 1.4;
+  }
+
+  .price-mini .utp strong { color: var(--yellow); font-weight: 500; }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--pink);
+    color: #06000A;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 3px;
+    padding: 16px 44px;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .cta-btn:hover { opacity: 0.88; }
+
+  .cta-fine {
+    font-size: 11px;
+    color: var(--dim);
+    margin-top: 10px;
+    letter-spacing: 1px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 32px 0 48px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 4px;
+    color: var(--pink);
+  }
+
+  .footer p {
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 1px;
+  }
+
+  @media print {
+    body::before { display: none; }
+    .cover { min-height: auto; padding: 40px 0 32px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="brand-tag">CREOLAB</div>
+    <div class="cover-label">НОВЫЙ КУРС</div>
+    <h1>
+      АНАТОМИЯ<br>
+      <span class="line-pink">КОНВЕРСИИ</span><br>
+      <span class="line-dim">В КРЕАТИВЕ</span>
+    </h1>
+    <p class="cover-sub">
+      Полный путь от идеи до масштабированного креатива, который льёт в плюс на <strong>белых офферах.</strong> Без "просто снимай красиво" — только система, которая работает у действующих байеров в 2026.
+    </p>
+    <div class="cover-meta">
+      <div class="meta-item">МОДУЛЕЙ<span>8</span></div>
+      <div class="meta-item">БОНУС<span>1</span></div>
+      <div class="meta-item">ФОРМАТ<span>Видео + практика</span></div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro">
+    <p>Большинство арбитражников относятся к креативу как к формальности: "снял — залил — смотрим по циферкам". На сером трафике это иногда прощает ошибки. На <strong>белых офферах — нет.</strong> Аудитория рациональнее, модерация строже, а конкуренция за клик выше, потому что бюджеты крутят команды с production-отделами.</p>
+    <p>Этот курс — не подборка "20 идей для крео". Это система: как понять продукт и аудиторию, превратить это понимание в десятки проверяемых гипотез, собрать их руками или через AI, и вытащить максимум из каждого winner'а вместо того, чтобы каждый раз начинать с нуля.</p>
+    <div class="intro-quote">
+      <p>«Креатив, который конвертит — это не искусство и не удача. Это гипотеза, для которой вы правильно сделали домашнюю работу.»</p>
+    </div>
+    <p>8 модулей + бонусная лекция «Кради как художник» — о том, как брать чужие рабочие идеи и делать из них своё, а не тупую копию, которая ловит бан у модерации и презрение у аудитории.</p>
+  </div>
+
+  <!-- MODULE 1 -->
+  <div class="trigger t1">
+    <div class="trigger-header">
+      <div class="trigger-num">01</div>
+      <div class="trigger-title-block">
+        <div class="trigger-tag">МОДУЛЬ 01 — ОСНОВЫ</div>
+        <h2>ЧТО ТАКОЕ<br><em>КРЕАТИВ</em></h2>
+      </div>
+    </div>
+    <div class="trigger-body">
+      <p>Разбираем, из чего состоит креатив, который реально останавливает скролл. «Красиво» ≠ «конвертит».</p>
+
+      <div class="mechanic">
+        <div class="mechanic-label">ФОРМАТЫ</div>
+        <p>Статика · UGC · motion · скринкасты — что заходит на каждой площадке.</p>
+      </div>
+
+      <div class="how-to">
+        <div class="how-to-label">ЧТО ВНУТРИ</div>
+        <div class="how-row"><div class="how-bullet"></div><p>Карта форматов по площадкам и вертикалям</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Структура «хук → эскалация → оффер → CTA»</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Чек-лист «пройдёт модерацию»</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Разбор топовых креативов по CTR</p></div>
+      </div>
+
+      <div class="formula">
+        <span class="formula-label">ФОРМУЛА</span>
+        <div class="f-block">Хук</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Эскалация</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Оффер</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">CTA</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 2 -->
+  <div class="trigger t2">
+    <div class="trigger-header">
+      <div class="trigger-num">02</div>
+      <div class="trigger-title-block">
+        <div class="trigger-tag">МОДУЛЬ 02 — ПРОИЗВОДСТВО</div>
+        <h2>СПОСОБЫ<br><em>СОЗДАНИЯ</em></h2>
+      </div>
+    </div>
+    <div class="trigger-body">
+      <p>От монтажа в CapCut до команды актёров — какой способ производства выбрать под свою скорость тестов.</p>
+
+      <div class="mechanic">
+        <div class="mechanic-label">ИНСТРУМЕНТЫ</div>
+        <p>Монтаж · биржи фрилансеров · UGC-платформы · ТЗ для подрядчиков.</p>
+      </div>
+
+      <div class="how-to">
+        <div class="how-to-label">ЧТО ВНУТРИ</div>
+        <div class="how-row"><div class="how-bullet"></div><p>Пайплайн от идеи до готового файла</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Шаблон ТЗ для монтажёра и актёра</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Проверенные биржи исполнителей</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Сам, фриланс или своя команда</p></div>
+      </div>
+
+      <div class="formula">
+        <span class="formula-label">ФОРМУЛА</span>
+        <div class="f-block">Идея</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Исполнитель</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Сборка</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Готовый крео</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 3 -->
+  <div class="trigger t3">
+    <div class="trigger-header">
+      <div class="trigger-num">03</div>
+      <div class="trigger-title-block">
+        <div class="trigger-tag">МОДУЛЬ 03 — AI-ПРОИЗВОДСТВО</div>
+        <h2>КРЕАТИВЫ<br><em>С ПОМОЩЬЮ AI</em></h2>
+      </div>
+    </div>
+    <div class="trigger-body">
+      <p>Как нейросети закрывают рутину производства и позволяют тестировать в разы больше гипотез.</p>
+
+      <div class="mechanic">
+        <div class="mechanic-label">СТЕК</div>
+        <p>Генерация видео · voice-clone · AI-аватары · автосубтитры и локализация.</p>
+      </div>
+
+      <div class="how-to">
+        <div class="how-to-label">ЧТО ВНУТРИ</div>
+        <div class="how-row"><div class="how-bullet"></div><p>Пайплайн промпт → готовый ролик за 1-2 часа</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Библиотека рабочих промптов</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Где AI палится модерацией</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Когда AI экономит, а когда убивает конверсию</p></div>
+      </div>
+
+      <div class="formula">
+        <span class="formula-label">ФОРМУЛА</span>
+        <div class="f-block">Промпт</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Генерация</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Доработка</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Готовый крео</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 4 -->
+  <div class="trigger t4">
+    <div class="trigger-header">
+      <div class="trigger-num">04</div>
+      <div class="trigger-title-block">
+        <div class="trigger-tag">МОДУЛЬ 04 — ИССЛЕДОВАНИЕ</div>
+        <h2>АНАЛИЗ<br><em>ПРОДУКТА</em></h2>
+      </div>
+    </div>
+    <div class="trigger-body">
+      <p>Продукт нужно разобрать до костей — иначе креатив бьёт мимо оффера.</p>
+
+      <div class="mechanic">
+        <div class="mechanic-label">ЧТО РАЗБИРАЕМ</div>
+        <p>Воронка · конкуренты · реальное УТП · путь пользователя до конверсии.</p>
+      </div>
+
+      <div class="how-to">
+        <div class="how-to-label">ЧТО ВНУТРИ</div>
+        <div class="how-row"><div class="how-bullet"></div><p>Бриф на анализ продукта за 30 минут</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Spy-инструменты и как их читать</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Метод поиска рабочего УТП</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Чек-лист «продукт-креатив fit»</p></div>
+      </div>
+
+      <div class="formula">
+        <span class="formula-label">ФОРМУЛА</span>
+        <div class="f-block">Оффер</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Конкуренты</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">УТП</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Бриф для крео</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 5 -->
+  <div class="trigger t5">
+    <div class="trigger-header">
+      <div class="trigger-num">05</div>
+      <div class="trigger-title-block">
+        <div class="trigger-tag">МОДУЛЬ 05 — АУДИТОРИЯ</div>
+        <h2>АНАЛИЗ<br><em>ЦА</em></h2>
+      </div>
+    </div>
+    <div class="trigger-body">
+      <p>Один оффер заходит по-разному, если не знаешь боли и язык своей аудитории.</p>
+
+      <div class="mechanic">
+        <div class="mechanic-label">МЕТОДЫ</div>
+        <p>Комментарии и отзывы · JTBD · карта возражений и страхов.</p>
+      </div>
+
+      <div class="how-to">
+        <div class="how-to-label">ЧТО ВНУТРИ</div>
+        <div class="how-row"><div class="how-bullet"></div><p>Рабочий шаблон аватара ЦА</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Сбор реального языка для хуков</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Карта возражений</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Практика на твоём оффере</p></div>
+      </div>
+
+      <div class="formula">
+        <span class="formula-label">ФОРМУЛА</span>
+        <div class="f-block">Данные</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Боли и язык</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Аватар</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Углы для крео</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 6 -->
+  <div class="trigger t6">
+    <div class="trigger-header">
+      <div class="trigger-num">06</div>
+      <div class="trigger-title-block">
+        <div class="trigger-tag">МОДУЛЬ 06 — СТРАТЕГИЯ ТЕСТОВ</div>
+        <h2>ГЕНЕРАЦИЯ<br><em>ГИПОТЕЗ</em></h2>
+      </div>
+    </div>
+    <div class="trigger-body">
+      <p>Тестировать креативы хаотично — долгий путь в плюс. Собираем систему гипотез.</p>
+
+      <div class="mechanic">
+        <div class="mechanic-label">ФРЕЙМВОРКИ</div>
+        <p>Матрица углов · приоритизация по ICE · бэклог на недели вперёд.</p>
+      </div>
+
+      <div class="how-to">
+        <div class="how-to-label">ЧТО ВНУТРИ</div>
+        <div class="how-row"><div class="how-bullet"></div><p>10+ углов на оффер за 15 минут</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Приоритизация гипотез по ICE</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Сколько тестов и с каким бюджетом</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Как читать результат теста</p></div>
+      </div>
+
+      <div class="formula">
+        <span class="formula-label">ФОРМУЛА</span>
+        <div class="f-block">Анализ</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Углы</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">ICE-приоритет</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Тест</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 7 -->
+  <div class="trigger t7">
+    <div class="trigger-header">
+      <div class="trigger-num">07</div>
+      <div class="trigger-title-block">
+        <div class="trigger-tag">МОДУЛЬ 07 — SCALE</div>
+        <h2>МАСШТАБИРОВАНИЕ<br><em>КРЕАТИВА</em></h2>
+      </div>
+    </div>
+    <div class="trigger-body">
+      <p>Найти winner — полдела. Деньги теряют именно на масштабировании.</p>
+
+      <div class="mechanic">
+        <div class="mechanic-label">МЕТОДЫ SCALE</div>
+        <p>Вариации хука · форматы под площадки · ступенчатый бюджет · ротация.</p>
+      </div>
+
+      <div class="how-to">
+        <div class="how-to-label">ЧТО ВНУТРИ</div>
+        <div class="how-row"><div class="how-bullet"></div><p>10-15 вариаций одного winner'а</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Когда масштабировать, когда убивать</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Бюджет вверх без просадки CPA</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>План ротации креативов <span class="sticker">чтобы не сливать плюс</span></p></div>
+      </div>
+
+      <div class="formula">
+        <span class="formula-label">ФОРМУЛА</span>
+        <div class="f-block">Winner</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Вариации</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Бюджет ↑</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Ротация</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 8 / BONUS -->
+  <div class="trigger t8 bonus">
+    <div class="trigger-header">
+      <div class="trigger-num">08</div>
+      <div class="trigger-title-block">
+        <div class="trigger-tag">БОНУС — АВТОРСКИЙ УГОЛ</div>
+        <h2>КРАДИ КАК<br><em>ХУДОЖНИК</em></h2>
+      </div>
+    </div>
+    <div class="trigger-body">
+      <p>Копия чужого крео почти никогда не работает так же. Разбираем механику, а не картинку.</p>
+
+      <div class="mechanic">
+        <div class="mechanic-label">МЕТОД</div>
+        <p>Деконструкция → что универсально → пересборка под себя → своя подпись.</p>
+      </div>
+
+      <div class="how-to">
+        <div class="how-to-label">ЧТО ВНУТРИ</div>
+        <div class="how-row"><div class="how-bullet"></div><p>Деконструкция чужого крео за 10 минут</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Где грань между вдохновением и копипастой</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Живой разбор вирусного крео</p></div>
+        <div class="how-row"><div class="how-bullet"></div><p>Чек-лист «это уже моё»</p></div>
+      </div>
+
+      <div class="formula">
+        <span class="formula-label">ФОРМУЛА</span>
+        <div class="f-block">Чужой крео</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Механика</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Свой угол</div>
+        <span class="f-arrow">→</span>
+        <div class="f-block">Уникальный крео</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA SECTION -->
+  <div class="cta-section">
+    <div class="cta-divider"></div>
+
+    <h2>ОТ ИДЕИ<br><span>ДО МАСШТАБА.</span></h2>
+    <p>Это не теория ради теории — каждый модуль закрывается практикой на твоём реальном оффере. К концу курса у тебя не «насмотренность», а <strong>рабочая система</strong> создания и масштабирования креативов на белых офферах.</p>
+
+    <div class="course-teaser">
+      <div class="teaser-tag">CREOLAB — КОНВЕРСИЯ ОТ КРЕАТИВА</div>
+      <div class="teaser-title">Система для арбитражников.<br>От анализа продукта до масштаба.</div>
+
+      <ul class="teaser-list">
+        <li>Что такое креатив и каким он бывает</li>
+        <li>Способы создания креативов</li>
+        <li>Создание креативов с помощью AI</li>
+        <li>Анализ продукта</li>
+        <li>Анализ целевой аудитории</li>
+        <li>Генерация гипотез</li>
+        <li>Масштабирование креатива</li>
+        <li>Бонус: Кради как художник</li>
+      </ul>
+
+      <div class="price-mini">
+        <div class="old">9 800 ₽</div>
+        <div class="now">4 900<sup>₽</sup></div>
+        <div class="utp"><strong>-50% на первый поток.</strong> Дальше цена растёт с каждым набором.</div>
+      </div>
+
+      <a href="#" class="cta-btn" onclick="openPayBot(); return false;">ЗАПИСАТЬСЯ НА КУРС →</a>
+      <p class="cta-fine">Оплата картой через Tribute · Количество мест ограничено</p>
+    </div>
+
+    <p style="font-size:13px;color:var(--muted);margin-top:8px;">Разборы креативов, хуки и механики бесплатно в канале: <strong style="color:var(--white);">@CreoLab</strong></p>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">CREOLAB</div>
+    <p>@CreoLab · Конверсия От Креатива · Курс для арбитражников</p>
+  </div>
+
+</div>
+<script>
+// Ссылка на оплату из Tribute: создай Digital Product в боте @tribute,
+// укажи цену 4900 (RUB) и вставь сюда веб-ссылку вида https://web.tribute.tg/p/XXXX
+var TRIBUTE_PAY_LINK = 'https://web.tribute.tg/p/REPLACE_ME';
+
+function openPayBot() {
+  var tg = window.Telegram && window.Telegram.WebApp;
+  if (tg && tg.openLink) {
+    tg.openLink(TRIBUTE_PAY_LINK);
+  } else {
+    window.open(TRIBUTE_PAY_LINK, '_blank');
+  }
+}
+</script>
+</body>
+</html>
